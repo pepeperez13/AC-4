@@ -33,8 +33,9 @@ public class UIView {
 
     public int askEggsPicked () {
         int pick;
-        System.out.print("Enter the number of eggs picked on each round: ");
+        System.out.print("Enter the number of eggs picked on each round [3-8]: ");
         pick = scanner.nextInt();
+        System.out.println("\n");
         while (pick < 3 || pick > 8) {
             System.out.print("\tThe value entered is not correct. Enter a valid one: ");
             pick = scanner.nextInt();

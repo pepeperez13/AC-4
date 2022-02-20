@@ -1,5 +1,6 @@
 public class CollectEggs extends Thread{
 
+    // Va ejecutando el thread que recoge huevos. Tiene que ir synchronized para que no modifique los huevos a la vez que otro thread
     @Override
     public synchronized void run () {
 

@@ -8,6 +8,7 @@ public class LayEggs extends Thread{
         this.chickenTag = chickenTag;
     }
 
+    // Va ejecutando el thread de cada gallina que pone huevos. Tiene que ir synchronized para que no modifique los huevos a la vez que otro thread
     @Override
     public synchronized void run () {
         Random r = new Random();

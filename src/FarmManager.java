@@ -64,24 +64,20 @@ public class FarmManager {
 
     public static void collectAndSellEggs () {
 
-        // SI los huevos acumulados no superan a los que se pueden recoger
+        // Si los huevos acumulados en esa ronda no superan a los que se pueden recoger
         if (getPartialEgg() <= getMaxEggs()) {
-            if (getPartialEgg() >= 3 && getPartialEgg() <= 4) {
+            // Si se han recogido entre 1 y 4 huevos, el precio es superior
+            if (getPartialEgg() >= 1 && getPartialEgg() <= 4) {
                 System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getPartialEgg(), 0.6 * getPartialEgg());
                 incrementMoney(0.6 * getPartialEgg());
             } else {
-                // Si no hay ni 3 ni 4 huevos, hay que comprobar que como mínimo se estén recogiendo más de 4
-                if (getPartialEgg() > 4) {
-                    System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getPartialEgg(), 0.4 * getPartialEgg());
-                    incrementMoney(0.4 * getPartialEgg());
-                }else{
-                    // Si no había un mínimo de 3 huevos para recoger, esos huevos se perderán
-                    updateLost(getPartialEgg());
-                }
+                // Si se han recogido mas de 4 huevos (por los tiempos nunca llegará a ocurrir que haya cero), el precio es inferior
+                System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getPartialEgg(), 0.4 * getPartialEgg());
+                incrementMoney(0.4 * getPartialEgg());
             }
             setPartialZero();
         }else{
-            // Si hay mas huevos acumulados que los que se pueden recoger
+            // Si hay más huevos acumulados en esa ronda que los que se pueden recoger
             if (getMaxEggs() >= 3 && getMaxEggs() <= 4) {
                 System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getMaxEggs(), 0.6 * getMaxEggs());
                 incrementMoney(0.6 * getMaxEggs());
