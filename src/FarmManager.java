@@ -37,11 +37,12 @@ public class FarmManager {
     public static double getEarnedMoney () {
         return earnedMoney;
     }
+
     public static void incrementEgg () {
         partialEgg++;
         totalEggs++;
     }
-    public static void collectEggs () {
+    public static void setPartialZero() {
         partialEgg = 0;
     }
 
@@ -65,17 +66,23 @@ public class FarmManager {
 
         // SI los huevos acumulados no superan a los que se pueden recoger
         if (getPartialEgg() <= getMaxEggs()) {
-            if (getPartialEgg() >= 1 && getPartialEgg() <= 4) {
+            if (getPartialEgg() >= 3 && getPartialEgg() <= 4) {
                 System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getPartialEgg(), 0.6 * getPartialEgg());
                 incrementMoney(0.6 * getPartialEgg());
             } else {
-                System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getPartialEgg(), 0.4 * getPartialEgg());
-                incrementMoney(0.4 * getPartialEgg());
+                // Si no hay ni 3 ni 4 huevos, hay que comprobar que como mínimo se estén recogiendo más de 4
+                if (getPartialEgg() > 4) {
+                    System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getPartialEgg(), 0.4 * getPartialEgg());
+                    incrementMoney(0.4 * getPartialEgg());
+                }else{
+                    // Si no había un mínimo de 3 huevos para recoger, esos huevos se perderán
+                    updateLost(getPartialEgg());
+                }
             }
-            collectEggs();
+            setPartialZero();
         }else{
             // Si hay mas huevos acumulados que los que se pueden recoger
-            if (getMaxEggs() >= 1 && getMaxEggs() <= 4) {
+            if (getMaxEggs() >= 3 && getMaxEggs() <= 4) {
                 System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getMaxEggs(), 0.6 * getMaxEggs());
                 incrementMoney(0.6 * getMaxEggs());
             } else {
@@ -83,7 +90,7 @@ public class FarmManager {
                 incrementMoney(0.4 * getMaxEggs());
             }
             updateLost((getPartialEgg() - getMaxEggs()));
-            collectEggs();
+            setPartialZero();
         }
     }
 

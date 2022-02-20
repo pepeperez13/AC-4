@@ -1,6 +1,5 @@
 public class CollectEggs extends Thread{
 
-
     @Override
     public synchronized void run () {
 

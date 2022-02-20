@@ -25,7 +25,6 @@ public class LayEggs extends Thread{
                 System.out.printf("Chicken #%d died.\n", chickenTag);
             }
         }
-
         FarmManager.killChicken();
     }
 }
