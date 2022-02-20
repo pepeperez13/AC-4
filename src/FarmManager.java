@@ -1,11 +1,14 @@
+/**
+ * Clase que gestiona el contabilizar huevos, gallinas, precios etc. En resumen gestiona la granja en general
+ */
 public class FarmManager {
-    private static int chickenNumber;
-    private static int pickInterval;
-    private static int maxEggs;
+    private static int chickenNumber; // Numero de gallinas en la granja
+    private static int pickInterval;  // Intervalo temporal de recogida
+    private static int maxEggs;       // Huevos maximos que se pueden recoger
     private static double earnedMoney;
-    private static int partialEgg;
-    private static int totalEggs;
-    private static int lostEggs;
+    private static int partialEgg;    // Huevos que se han acumulado entre cada recogida
+    private static int totalEggs;     // Huevos puestos en total
+    private static int lostEggs;      // Huevos que se habían puesto pero no se han podido recoger
 
 
     public FarmManager(int chickenNumber, int pickInterval, int maxEggs) {
@@ -62,6 +65,7 @@ public class FarmManager {
         return lostEggs;
     }
 
+    // Controla la logica de cuantos huevos se pueden recoger y su precio
     public static void collectAndSellEggs () {
 
         // Si los huevos acumulados en esa ronda no superan a los que se pueden recoger
@@ -85,7 +89,9 @@ public class FarmManager {
                 System.out.printf("\nThe farmer collected %d eggs and sold them for %.1f€\n\n", getMaxEggs(), 0.4 * getMaxEggs());
                 incrementMoney(0.4 * getMaxEggs());
             }
+            // Como se han recogido menos huevos de los que se habían puesto, se pierden huevos
             updateLost((getPartialEgg() - getMaxEggs()));
+            // Ponemos a cero los huevos parciales acumulados entre las recogidas
             setPartialZero();
         }
     }
